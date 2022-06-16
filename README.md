@@ -1,26 +1,7 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://images.velog.io/images/1yongs_/post/9c535649-df85-4ce9-beee-7bbf29160a78/nestjs_socketio_redis.png" width="320" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
@@ -58,17 +39,49 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+> **Note:** The **Socket.io-Snippets** 
+>io.on('connect', onConnect);
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+>function onConnect(socket){
+>
+>  // Gửi cho tất cả client
+>  socket.emit('hello', 'can you hear me?', 1, 2, 'abc');
+>
+>  // Gửi cho tất cả client ngoại trừ người gửi
+>  socket.broadcast.emit('broadcast', 'hello friends!');
+>
+>  // Gửi cho tất cả client trong room 'game' ngoại trừ người gửi
+>  socket.to('game').emit('nice game', "let's play a game");
+>
+>  // Gửi cho tất cả client trong room 'game1' và room 'game2' ngoại trừ người gửi
+>  socket.to('game1').to('game2').emit('nice game', "let's play a game (too)");
+>
+>  //  Gửi cho tất cả client trong room 'game' bao gồm cả người gửi
+>  io.in('game').emit('big-announcement', 'the game will start soon');
+>
+>  // Gửi cho tất cả client trong namespace 'myNamespace', bao gồm cả người gửi
+>  io.of('myNamespace').emit('bigger-announcement', 'the tournament will start soon');
+>
+>  // Gửi cho room 'room' trong namespace 'myNamespace', bao gồm cả người gửi
+>  io.of('myNamespace').to('room').emit('event', 'message');
+>
+>  // Gửi tin nhắn riêng cho socket đó qua socketId
+>  io.to(`${socketId}`).emit('hey', 'I just met you');
+>
+>  // Gửi không đính kèm file nén
+>  socket.compress(false).emit('uncompressed', "that's rough");
+>
+>  // Việc gửi tin nhắn này cần sự chấp nhận từ client thì mới có thể đến được client
+>  socket.volatile.emit('maybe', 'do you really need it?');
+>
+>  // Gửi dữ liệu liên quan đến hệ nhị phân
+>  socket.binary(false).emit('what', 'I have no binaries!');
+>
+>  // Gửi dữ liệu cho tất cả client sử dụng node
+>  io.local.emit('hi', 'my lovely babies');
+>
+>  // Gửi đến tất cả client kết nối đến
+>  io.emit('an event sent to all connected clients');
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
 # WebSocket-Nest-ChatDemo
