@@ -39,7 +39,8 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-> **Note:** The **Socket.io-Snippets** 
+># **Note:** The **Socket.io-Snippets** 
+```bash
 >io.on('connect', onConnect);
 
 >function onConnect(socket){
@@ -83,5 +84,5 @@ $ npm run test:cov
 >  // Gửi đến tất cả client kết nối đến
 >  io.emit('an event sent to all connected clients');
 
-
+```
 # WebSocket-Nest-ChatDemo
