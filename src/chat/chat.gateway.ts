@@ -1,19 +1,20 @@
 import { Inject } from '@nestjs/common';
-import { OnGatewayConnection, 
+import {
+  ConnectedSocket, MessageBody, OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
   SubscribeMessage,
-  WebSocketGateway, 
-  WebSocketServer } from '@nestjs/websockets';
+  WebSocketGateway,
+  WebSocketServer
+} from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io'
 import { Logger } from 'winston';
 
-@WebSocketGateway({namespace: '/chat'})
+@WebSocketGateway({ namespace: '/chat' })
 export class ChatGateway implements
-OnGatewayConnection,
- OnGatewayInit,
-  OnGatewayDisconnect 
-{
+  OnGatewayConnection,
+  OnGatewayInit,
+  OnGatewayDisconnect {
   @Inject('winston') private readonly logger: Logger;
 
   @WebSocketServer() wss: Server;
@@ -35,14 +36,19 @@ OnGatewayConnection,
   }
 
   @SubscribeMessage('joinRoom')
-  handleRoomJoin(client: Socket, room: string ) {
+  handleRoomJoin(client: Socket, room: string) {
     client.join(room);
     client.emit('joinedRoom', room);
   }
 
   @SubscribeMessage('leaveRoom')
-  handleRoomLeave(client: Socket, room: string ) {
+  handleRoomLeave(client: Socket, room: string) {
     client.leave(room);
     client.emit('leftRoom', room);
+  }
+
+  @SubscribeMessage('typing')
+  async typing( isTyping: boolean, name: string, @ConnectedSocket() client: Socket) {
+    client.broadcast.emit('typing', { name, isTyping });
   }
 }
